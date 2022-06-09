@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8082"
+  origin: "http://localhost:3000"
 };
 
 app.use(cors(corsOptions));
@@ -26,7 +26,7 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to Music Album Application." });
 });
 
 require("./app/routes/turorial.routes")(app);
