@@ -1,3 +1,5 @@
+const { artist } = require(".");
+
 module.exports = (sequelize, Sequelize) => {
     const Track = sequelize.define("track", {
       title: {
@@ -8,7 +10,10 @@ module.exports = (sequelize, Sequelize) => {
       },
       published: {
         type: Sequelize.BOOLEAN
-      }
+      },
+      artist: {
+        type: Sequelize.STRING
+      },
     });
     return Track;
   };

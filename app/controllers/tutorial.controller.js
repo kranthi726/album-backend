@@ -1,5 +1,7 @@
 const db = require("../models");
 const Tutorial = db.tutorials;
+const Track = db.track;
+const Artist = db.artist;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
@@ -16,7 +18,8 @@ exports.create = (req, res) => {
   const tutorial = {
     title: req.body.title,
     description: req.body.description,
-    published: req.body.published ? req.body.published : false
+    published: req.body.published ? req.body.published : false,
+    artist:req.body.artist,
   };
 
   // Save Tutorial in the database
@@ -31,6 +34,9 @@ exports.create = (req, res) => {
       });
     });
 };
+
+// Find a single Tutorial with an id
+
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
@@ -70,6 +76,56 @@ exports.findOne = (req, res) => {
     });
 };
 
+// Find a single Tutorial with an id
+exports.artfindOne = (req, res) => {
+  const id = req.params.id;
+
+  Tutorial.findAll({
+    where: {
+      artist: id,
+      
+    },
+  })
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find Tutorial with id=${id}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving Album with id=" + id
+      });
+    });
+};
+
+exports.trackfindOne = (req, res) => {
+  const id = req.params.id;
+
+  Track.findAll({
+    where: {
+      artist: id,
+      
+    },
+  })
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find Track with id=${id}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving Tutorial with id=" + id
+      });
+    });
+};
 // Update a Tutorial by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
