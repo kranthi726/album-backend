@@ -14,12 +14,14 @@ exports.create = (req, res) =>{
     const track = {
         title:req.body.title,
         description: req.body.description,
-        published: req.body.published ? req.body.published : false
+        published: req.body.published ? req.body.published : false,
+        artist:req.body.artist,
     }
     //save the track
     Track.create(track)
     .then(data => {
         res.send(data);
+        alert(data);
       })
       .catch(err => {
         res.status(500).send({

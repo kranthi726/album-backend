@@ -8,7 +8,10 @@ module.exports = (sequelize, Sequelize) => {
     },
     published: {
       type: Sequelize.BOOLEAN
-    }
+    },
+    artist: {
+      type: Sequelize.STRING
+    },
   });
   return Tutorial;
 };
